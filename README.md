@@ -40,7 +40,7 @@ Windows 11 (SMB Server)
 ---
 
 ##  Windows Setup
-```powershell
+```
 net user smbshare StrongP@ssw0rd! /add
 New-Item -Path "D:\Shared" -ItemType Directory -Force
 icacls "D:\Shared" /inheritance:r /grant "User:(OI)(CI)F" "smbshare:(OI)(CI)M" /T
