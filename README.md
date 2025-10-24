@@ -41,22 +41,22 @@ Windows 11 (SMB Server)
 
 ##  Windows Setup
 ```powershell
-- net user smbshare StrongP@ssw0rd! /add
-- New-Item -Path "D:\Shared" -ItemType Directory -Force
-- icacls "D:\Shared" /inheritance:r /grant "User:(OI)(CI)F" "smbshare:(OI)(CI)M" /T
-- New-SmbShare -Name "Shared" -Path "D:\Shared" -FullAccess smbshare
-- Set-SmbServerConfiguration -EncryptData $true -Force
-- New-NetFirewallRule -DisplayName "Allow SMB from iMac" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Allow -RemoteAddress 192.168.1.x
+net user smbshare StrongP@ssw0rd! /add
+New-Item -Path "D:\Shared" -ItemType Directory -Force
+icacls "D:\Shared" /inheritance:r /grant "User:(OI)(CI)F" "smbshare:(OI)(CI)M" /T
+New-SmbShare -Name "Shared" -Path "D:\Shared" -FullAccess smbshare
+Set-SmbServerConfiguration -EncryptData $true -Force
+New-NetFirewallRule -DisplayName "Allow SMB from iMac" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Allow -RemoteAddress 192.168.1.x
 ```
 
 ---
 
 ##  macOS Setup
 ```bash
-sudo security delete-internet-password -s 192.168.1.10 /Users/$(whoami)/Library/Keychains/login.keychain-db
+sudo security delete-internet-password -s 192.168.1.x /Users/$(whoami)/Library/Keychains/login.keychain-db
 - # Optional: clear cached credentials in Keychain if reconnection fails
 
-open "smb://192.168.1.10/Shared"
+open "smb://192.168.1.x/Shared"
 sudo xattr -d com.apple.quarantine /Volumes/Shared
 ```
 
