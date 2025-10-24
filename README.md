@@ -40,13 +40,13 @@ Windows 11 (SMB Server)
 ---
 
 ##  Windows Setup
-```
-net user smbshare StrongP@ssw0rd! /add
-New-Item -Path "D:\Shared" -ItemType Directory -Force
-icacls "D:\Shared" /inheritance:r /grant "User:(OI)(CI)F" "smbshare:(OI)(CI)M" /T
-New-SmbShare -Name "Shared" -Path "D:\Shared" -FullAccess smbshare
-Set-SmbServerConfiguration -EncryptData $true -Force
-New-NetFirewallRule -DisplayName "Allow SMB from iMac" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Allow -RemoteAddress 192.168.1.x
+```powershell
+- net user smbshare StrongP@ssw0rd! /add
+- New-Item -Path "D:\Shared" -ItemType Directory -Force
+- icacls "D:\Shared" /inheritance:r /grant "User:(OI)(CI)F" "smbshare:(OI)(CI)M" /T
+- New-SmbShare -Name "Shared" -Path "D:\Shared" -FullAccess smbshare
+- Set-SmbServerConfiguration -EncryptData $true -Force
+- New-NetFirewallRule -DisplayName "Allow SMB from iMac" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Allow -RemoteAddress 192.168.1.x
 ```
 
 ---
