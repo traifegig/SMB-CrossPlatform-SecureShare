@@ -5,7 +5,7 @@ featuring encrypted LAN transmission, fine-grained ACL permissions, and automate
 
 ---
 
-## 🔹 Project Overview
+##  Project Overview
 This project explores how to build a **secure and high-performance file sharing channel** between macOS and Windows devices over a local network.
 
 Instead of relying on third-party drives or cloud storage, this configuration establishes a **direct encrypted SMBv3 link** with:
@@ -17,7 +17,7 @@ Instead of relying on third-party drives or cloud storage, this configuration es
 
 ---
 
-## 🧱 Architecture
+##  Architecture
 
 ```
 iMac (macOS)
@@ -29,17 +29,17 @@ Windows 11 (SMB Server)
 
 ---
 
-## ⚙️ Key Features
-- ✅ Encrypted SMBv3 data channel
-- ✅ IP-level access control (DHCP + Firewall)
-- ✅ Separate user accounts (`smbshare`)
-- ✅ NTFS permission isolation (`User:(F)` / `smbshare:(M)`)
-- ✅ macOS Finder + Word compatibility
-- ✅ Troubleshooting log and automated scripts
+##  Key Features
+-  Encrypted SMBv3 data channel
+-  IP-level access control (DHCP + Firewall)
+-  Separate user accounts (`smbshare`)
+-  NTFS permission isolation (`User:(F)` / `smbshare:(M)`)
+-  macOS Finder + Word compatibility
+-  Troubleshooting log and automated scripts
 
 ---
 
-## 🪟 Windows Setup
+##  Windows Setup
 ```powershell
 net user smbshare StrongP@ssw0rd! /add
 New-Item -Path "D:\Shared" -ItemType Directory -Force
@@ -51,7 +51,7 @@ New-NetFirewallRule -DisplayName "Allow SMB from iMac" -Direction Inbound -Local
 
 ---
 
-## 🍎 macOS Setup
+##  macOS Setup
 ```bash
 sudo security delete-internet-password -s 192.168.1.10 /Users/$(whoami)/Library/Keychains/login.keychain-db
 - # Optional: clear cached credentials in Keychain if reconnection fails
@@ -62,14 +62,14 @@ sudo xattr -d com.apple.quarantine /Volumes/Shared
 
 ---
 
-## 🧩 Troubleshooting Highlights
+##  Troubleshooting Highlights
 - Word for Mac “no permission” issue → caused by sandbox restriction (may require full disk access)
 - Fixed by using `/Volumes/Shared` path and granting full disk access
 - Finder cache & Keychain cleanup required for reconnect (If path set error, reset is needed)
 
 ---
 
-## 🔒 Security Notes
+##  Security Notes
 - Do **not** expose port 445 to the internet
 - Use VPN for remote access
 - SMBv3 encryption enabled (`Set-SmbServerConfiguration -EncryptData $true`)
@@ -77,14 +77,14 @@ sudo xattr -d com.apple.quarantine /Volumes/Shared
 
 ---
 
-## 🧠 Lessons Learned
+##  Lessons Learned
 - Permission inheritance can easily expand scope unintentionally
 - Word for Mac uses temporary lock files that require delete permission
 - macOS Finder caches SMB sessions, so credential cleanup is essential
 
 ---
 
-## 🧰 Next Steps
+##  Next Steps
 - Add VPN tunnel (WireGuard)
 - Automate scheduled SMB service monitoring
 - Integrate centralized logging
